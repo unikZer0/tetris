@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Line the maze</title>
+</head>
+<body >
+    <canvas WIDTH="500" HEIGHT="400" ID="canvas_1" tabindex="0">
+
+    </canvas>
+    <style>
+        canvas {
+            border: 5px solid #000;
+            margin: 100px auto;
+        }
+    </style>
+    <script>
+        var canvas = document.getElementById("canvas_1");
+        var canvas_context = canvas.getContext("2d");
+
+        canvas_context = canvas.getContext("2d");
+        canvas_context.fillRect(10, 10, 50, 30);
+        canvas_context.beginPath();
+
+
+var x = 10;
+var y = 10;
+
+     //ເສັ້ນທີ1
+     
+     canvas_context = canvas.getContext("2d");
+	canvas_context.beginPath();
+     canvas_context.lineWidth="10";
+     canvas_context.moveTo(70,0);
+     canvas_context.lineTo(70,175);
+     canvas_context.stroke();
+		//ເສັ້ນທີ2
+	canvas_context.beginPath();
+     canvas_context.lineWidth="10";
+     canvas_context.moveTo(0,250);
+     canvas_context.lineTo(160,250);
+     canvas_context.stroke();
+	// //ເສັ້ນທີ3
+	canvas_context.beginPath();
+     canvas_context.lineWidth="10";
+     canvas_context.moveTo(160,50);
+     canvas_context.lineTo(160,255);
+     canvas_context.stroke();
+
+			//ເສັ້ນທີ4
+	canvas_context.beginPath();
+     canvas_context.lineWidth="10";
+     canvas_context.moveTo(270,50);
+     canvas_context.lineTo(270,225);
+     canvas_context.stroke();
+	//ເສັ້ນທີ5
+	canvas_context.beginPath();
+     canvas_context.lineWidth="10";
+     canvas_context.moveTo(270,220);
+     canvas_context.lineTo(500,220);
+     canvas_context.stroke();
+	// //ເສັ້ນທີ6
+	canvas_context.beginPath();
+     canvas_context.lineWidth="10";
+     canvas_context.moveTo(265,50);
+     canvas_context.lineTo(425,50);
+     canvas_context.stroke();
+	// //ເສັ້ນທີ7
+	canvas_context.beginPath();
+     canvas_context.lineWidth="10";
+     canvas_context.moveTo(420,50);
+     canvas_context.lineTo(420,160);
+     canvas_context.stroke();
+	// //ເສັ້ນທີ8
+	canvas_context.beginPath();
+     canvas_context.lineWidth="10"
+     canvas_context.moveTo(340,160);
+     canvas_context.lineTo(425,160);
+     canvas_context.stroke();
+	//ເສັ້ນ9
+	canvas_context.beginPath();
+     canvas_context.lineWidth="10";
+     canvas_context.moveTo(70,320);
+     canvas_context.lineTo(160,320);
+     canvas_context.stroke();
+	//ເສັ້ນ10
+	canvas_context.beginPath();
+     canvas_context.lineWidth="10";
+     canvas_context.moveTo(70,315);
+     canvas_context.lineTo(70,500);
+     canvas_context.stroke();
+	//ເສັ້ນ11
+	canvas_context.beginPath();
+     canvas_context.lineWidth="10";
+     canvas_context.moveTo(155,320);
+     canvas_context.lineTo(155,500);
+     canvas_context.stroke();
+	//ເສັ້ນ12
+	canvas_context.beginPath();
+     canvas_context.lineWidth="10";
+     canvas_context.moveTo(230,320);
+     canvas_context.lineTo(380,320);
+     canvas_context.stroke();
+	//ເສັ້ນ13
+	canvas_context.beginPath();
+     canvas_context.lineWidth="10";
+     canvas_context.moveTo(300,500);
+     canvas_context.lineTo(300,320);
+     canvas_context.stroke();
+	//ເສັ້ນທີ14
+	canvas_context.beginPath();
+     canvas_context.lineWidth="10";
+     canvas_context.moveTo(450,320);
+     canvas_context.lineTo(500,320);
+     canvas_context.stroke();
+function draw() {
+    canvas_context.clearRect(0, 0, canvas.width, canvas.height);
+    canvas_context.fillRect(x, y, 50, 30);
+
+    if (x + 10 > canvas.width || x - 10 < 0) {
+        x = 100; // Reset the x position if it goes out of bounds
+    }
+
+    if (y + 10 > canvas.height || y - 10 < 0) {
+        y = 100; // Reset the y position if it goes out of bounds
+    }
+}
+
+function doKeyDown(e) {
+    var moveAmount = 10;
+
+    // Save the current position
+    var originalX = x;
+    var originalY = y;
+
+    // Handle key presses
+    if (e.keyCode == 87) {  // W key
+        y = Math.max(y - moveAmount, 0); // Ensure y doesn't go below 0
+    }
+    else if (e.keyCode == 83) {  // S key
+        y = Math.min(y + moveAmount, canvas.height - 30); // Ensure y doesn't go beyond canvas height
+    }
+    else if (e.keyCode == 65) {  // A key
+        x = Math.max(x - moveAmount, 0); // Ensure x doesn't go below 0
+    }
+    else if (e.keyCode == 68) {  // D key
+        x = Math.min(x + moveAmount, canvas.width - 50); // Ensure x doesn't go beyond canvas width
+    }
+    else if (e.keyCode == 69) {  // E key
+        sound.pause();
+    }
+
+    // Check if the new position is within bounds, otherwise, revert to the original position
+    if (x < 0 || x + 50 > canvas.width || y < 0 || y + 30 > canvas.height) {
+        x = originalX;
+        y = originalY;
+    }
+
+    clearCanvas();
+    canvas_context.fillRect(x, y, 50, 30);
+    sound.play();
+}
+
+function clearCanvas() {
+    canvas.width = canvas.width;
+}
+
+function sound(src) {
+    this.sound = document.createElement("audio");
+    this.sound.src = src;
+    this.sound.setAttribute("preload", "auto");
+    this.sound.setAttribute("controls", "none");
+    this.sound.style.display = "none";
+    document.body.appendChild(this.sound);
+
+    this.play = function() {
+        this.sound.play();
+    }
+
+    this.pause = function() {
+        this.sound.pause();
+    }
+}
+
+// Add the event listener for keydown event
+document.addEventListener("keydown", doKeyDown);
+
+// Initial draw
+draw();
+    </script>
+</body>
+</html>
